@@ -1,12 +1,7 @@
 library(tidyverse)
 library(Momocs)
 library(vroom)
-
-
-# bird.tree <- ape::read.tree("bird_tree.tre") %>% ladderize()
-# bird.tree$tip.label <- gsub("_"," ",bird.tree$tip.label)
-# plot(main = "Birds Phylogenetics Tree", bird.tree,cex=0.1)
-# i commented this out for now because its just plotting the tree
+library(ape)
 
 f <- list.files("Feathers",pattern=".txt|.csv",full.names = TRUE)
 
@@ -49,12 +44,6 @@ outs %>%
   stack()
 
 
-outs %>%
-  coo_interpolate(outs.min) %>% 
-  coo_align()  %>%
-  fgProcrustes() %>% 
-  efourier(norm=FALSE) 
-
 outs.pca <- outs %>%
   coo_interpolate(outs.min) %>%
   coo_align()  %>%
@@ -65,4 +54,16 @@ outs.pca <- outs %>%
 
 outs.pca %>% 
   plot_PCA(title = "Primary Feathers")
+
+
+bird.tree <- ape::read.tree("bird_tree.tre") %>% ladderize()
+bird.tree$tip.label <- gsub("_"," ",bird.tree$tip.label)
+plot(main = "Birds Phylogenetics Tree", bird.tree,cex=0.1)
+
+
+basename(names(outs))[1:5]
+head(outs.pca$x,1)
+
+files_species <- out.df$filename
+
 
