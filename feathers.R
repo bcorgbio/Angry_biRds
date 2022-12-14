@@ -2,12 +2,21 @@ library(tidyverse)
 library(Momocs)
 library(vroom)
 library(ape)
+library(mgsub)
 
 f <- list.files("Feathers",pattern=".txt|.csv",full.names = TRUE)
 
 out.df <- vroom::vroom(f, id = "filename")
 #make list
 outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
+summary(outs.l)
+
+birdlist <- unique(mgsub(basename(out.df$filename), c("XY_",".txt"), c("","")))
+view(birdlist)
+
+filenames <-tibble(xy.file=out.df$filename, species=mgsub(basename(out.df$filename), c("XY_",".txt"), c("","")))
+
+view(birdlist)
 
 outs.l %>% 
   Out() %>% 
@@ -55,9 +64,20 @@ outs.pca <- outs %>%
 outs.pca %>% 
   plot_PCA(title = "Primary Feathers")
 
+outs.pca <-  tibble(xy.file=basename(rownames(outs.pca$x)),PC1=outs.pca$x[,1],PC2=outs.pca$x[,2])%>% 
+  left_join(filenames)
 
+#comparative analysis
+
+head(outs.pca$x,1)
+
+
+#plotting
 bird.tree <- ape::read.tree("bird_tree.tre") %>% ladderize()
+bird.tree <- keep.tip(bird.tree, birdlist)
 bird.tree$tip.label <- gsub("_"," ",bird.tree$tip.label)
+
+##bird.tree$tip.label <- gsub("_"," ",bird.tree$tip.label)
 plot(main = "Birds Phylogenetics Tree", bird.tree,cex=0.1)
 
 
@@ -65,5 +85,6 @@ basename(names(outs))[1:5]
 head(outs.pca$x,1)
 
 files_species <- out.df$filename
+
 
 
