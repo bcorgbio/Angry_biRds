@@ -3,6 +3,8 @@ library(Momocs)
 library(vroom)
 library(ape)
 library(mgsub)
+library(phytools)
+library(RRphylo)
 
 f <- list.files("Feathers",pattern=".txt|.csv",full.names = TRUE)
 
@@ -11,12 +13,7 @@ out.df <- vroom::vroom(f, id = "filename")
 outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
 summary(outs.l)
 
-birdlist <- unique(mgsub(basename(out.df$filename), c("XY_",".txt"), c("","")))
-view(birdlist)
-
-filenames <-tibble(xy.file=out.df$filename, species=mgsub(basename(out.df$filename), c("XY_",".txt"), c("","")))
-
-view(birdlist)
+birdlist <- tibble(xy.file=unique(basename(out.df$filename)), species=unique(mgsub(basename(out.df$filename), c("XY_",".txt","_"), c("",""," "))))
 
 outs.l %>% 
   Out() %>% 
@@ -65,7 +62,8 @@ outs.pca %>%
   plot_PCA(title = "Primary Feathers")
 
 outs.pca <-  tibble(xy.file=basename(rownames(outs.pca$x)),PC1=outs.pca$x[,1],PC2=outs.pca$x[,2])%>% 
-  left_join(filenames)
+  left_join(birdlist)
+
 
 #comparative analysis
 
@@ -74,17 +72,45 @@ head(outs.pca$x,1)
 
 #plotting
 bird.tree <- ape::read.tree("bird_tree.tre") %>% ladderize()
-bird.tree <- keep.tip(bird.tree, birdlist)
 bird.tree$tip.label <- gsub("_"," ",bird.tree$tip.label)
+bird.tree <- keep.tip(bird.tree, birdlist$species)
 
-##bird.tree$tip.label <- gsub("_"," ",bird.tree$tip.label)
+
 plot(main = "Birds Phylogenetics Tree", bird.tree,cex=0.1)
 
+#PC1s
 
-basename(names(outs))[1:5]
-head(outs.pca$x,1)
+outs.pc1 <- outs.pca %>% 
+  filter(species%in% bird.tree$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull
 
-files_species <- out.df$filename
+names(outs.pc1) <-  outs.pca%>% 
+  filter(species%in% bird.tree$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull(species)
 
+
+#PC2s
+outs.pc2 <- outs.pca %>% 
+  filter(species%in% bird.tree$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC2=mean(PC2)) %>% 
+  pull(PC2)
+
+names(outs.pc2) <-  outs.pca%>% 
+  filter(species%in% bird.tree$tip.label) %>% 
+  group_by(species) %>%
+  summarize(PC2=mean(PC2)) %>% 
+  pull(species)
+
+outs.PC1.BM<-brownie.lite(bird.tree,outs.pc1*10)
+
+outs.PC2.BM<-brownie.lite(bird.tree,outs.pc2*10)
+
+#shifts in evolutionary rate
+outs.PC1.RR <- RRphylo(tree=bird.tree,y=outs.pc1)
 
 
