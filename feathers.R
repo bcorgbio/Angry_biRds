@@ -113,4 +113,6 @@ outs.PC2.BM<-brownie.lite(bird.tree,outs.pc2*10)
 #shifts in evolutionary rate
 outs.PC1.RR <- RRphylo(tree=bird.tree,y=outs.pc1)
 
+##here is the error!
+
 
