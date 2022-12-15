@@ -112,14 +112,23 @@ outs.PC2.BM<-brownie.lite(con.tree,outs.pc2*10)
 
 #shifts in evolutionary rate
 outs.PC1.RR <- RRphylo(tree=con.tree,y=outs.pc1)
+outs.PC2.RR <- RRphylo(tree=con.tree,y=outs.pc2)
 
 outs.PC1.SS<- search.shift(RR=outs.PC1.RR,status.type="clade")
 outs.PC1.SS$single.clades
 
+outs.PC2.SS<- search.shift(RR=outs.PC2.RR,status.type="clade")
+outs.PC2.SS$single.clades
+
 plot(con.tree, cex=0.2)
 nodelabels(node = as.numeric(rownames(outs.PC1.SS$single.clades)),text = rownames(outs.PC1.SS$single.clades))
 
-outs.PC1.plot <- plotShift(RR=outs.PC1.RR,SS=outs.PC1.SS)
+plot(con.tree, cex=0.2)
+nodelabels(node = as.numeric(rownames(outs.PC2.SS$single.clades)),text = rownames(outs.PC2.SS$single.clades))
 
+outs.PC1.plot <- plotShift(RR=outs.PC1.RR,SS=outs.PC1.SS)
 outs.PC1.plot$plotClades()
+
+outs.PC2.plot <- plotShift(RR=outs.PC2.RR,SS=outs.PC2.SS)
+outs.PC2.plot$plotClades()
 
