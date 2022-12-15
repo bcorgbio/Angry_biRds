@@ -154,7 +154,7 @@ outs.PC1.BM$sig2.single
 outs.PC2.BM$sig2.single
 ```
 
-Across all observed primary feathers of various bird species, the evolutionary rate of PC1 is 0.006242593 and that of PC2 is 0.001396271, meaning PC1 is evolving at more than 4 times the rate of PC2. This could indicate the selection for PC1 in primary feathers as an advantageous trait in bird flight mechanics. 
+Across all observed primary feathers of various bird species, the evolutionary rate of PC1 is 0.006242593 and that of PC2 is 0.001396271, meaning PC1 is evolving at more than 4 times the rate of PC2. This could indicate there has been an elevated amount of selection pressure for PC1 in primary feathers as a potential advantageous trait in bird flight mechanics in varying environments and lifestyles.
 
 <br>
 
@@ -186,6 +186,8 @@ outs.PC2.SS$single.clades
 ```
 
 Similarly, there is also a statistically significant downwards PC2 rate shift in node 175, which represents the group encompassing the new world blackbirds and the new world sparrows. Within this group, the evolutionary rate of PC2 in primary feathers is shifted by -0.0003019869 at a 0.4% significance level. 
+
+Since the groups in which we detected significant evolutionary rate shifts broadly include both migrant and resident species, we cannot conclusively state that the shifts had a causal relationship with migration patterns. However, because we analyzed the outermost primary feathers, which are used for thrust and lift during flight, we can speculate that certain groups have evolved varying degrees of traits that may affect their flight mechanisms and potentially behaviors such as migration.
 
 ### Discussion
 
