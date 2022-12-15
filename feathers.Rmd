@@ -1,30 +1,196 @@
 ---
-title: "feathers"
-author: "biRd"
-date: "2022-12-12"
+title: "Primary Feather Evolution"
+author: "Angry_biRds"
+date: "2022-12-15"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo= FALSE, include= FALSE}
+library(tidyverse)
+library(Momocs)
+library(vroom)
+library(ape)
+library(mgsub)
+library(phytools)
+library(RRphylo)
+library(ggtree)
+library(wesanderson)
 ```
 
-## R Markdown
+### Introduction
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Methods
 
-```{r cars}
-summary(cars)
+
+```{r, echo= FALSE, message= FALSE, fig.cap= "Figure 1: Modified phylogenetic tree sourced from BirdTree.org. The tree was shortened to only include species analyzed in PCA."}
+
+con.tree <- read.tree("contree.tre")
+con.tree <- root(con.tree,"Sayornis_phoebe")
+plot(main = "Birds Phylogenetics Tree", con.tree,cex=0.2)
+
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+### Results
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+#### Principal Components
+
+```{r, echo= FALSE, include= FALSE}
+
+f <- list.files("Feathers",pattern=".txt|.csv",full.names = TRUE)
+
+out.df <- vroom::vroom(f, id = "filename")
+#make list
+outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
+summary(outs.l)
+
+birdlist <- tibble(xy.file=unique(basename(out.df$filename)), species=unique(mgsub(basename(out.df$filename), c("XY_",".txt"), c("",""))))
+
+outs.l %>% 
+  Out() %>% 
+  coo_flipx()
+
+##
+
+#make a large df with vroom
+out.df <- vroom::vroom(f, id = "filename") %>% 
+  mutate(species=gsub("XY_.+_\\..+","\\1",basename(filename))) %>% 
+  na.omit()
+
+#make list
+outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
+
+#extract wing info
+species <- gsub("XY_.+_\\..+","\\1",basename(names(outs.l)))
+
+
+outs <-  outs.l %>% 
+  Out(fac=list(species=species)) %>% 
+  coo_flipx()
+#pipes the list of matrices into Our() function, flip, and visualize with stack
+
+outs.min <- outs %>% 
+  coo_nb() %>% 
+  min()
+
+outs %>% 
+  coo_interpolate(outs.min) %>% 
+  coo_slide(id=1) %>% 
+  coo_align()  %>%
+  fgProcrustes()
+
+outs.pca <- outs %>%
+  coo_interpolate(outs.min) %>%
+  coo_align()  %>%
+  coo_slide(id=1) %>% 
+  fgProcrustes() %>% 
+  efourier(norm=FALSE) %>% 
+  PCA()
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r, echo= FALSE, message= FALSE, fig.cap= "Figure 2: Biplot visualization of Principle Component 1 (PC1) and PC2 of the primary feathers."}
+outs.pca %>% 
+  plot_PCA(title = "Primary Feathers")
+```
+
+Based on the PCA analysis results shown in figure 2, PC1, diagonal lobe thickness, and PC2, equatorial rotation, accounts for 63.5% and 24.9% of the variance in our sample respectively. 
+
+
+
+```{r, echo= FALSE, include= FALSE}
+outs.pca <-  tibble(xy.file=basename(rownames(outs.pca$x)),PC1=outs.pca$x[,1],PC2=outs.pca$x[,2])%>% 
+  left_join(birdlist)
+
+#PC1s
+outs.pc1 <- outs.pca %>% 
+  filter(species%in% con.tree$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull
+
+names(outs.pc1) <-  outs.pca%>% 
+  filter(species%in% con.tree$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull(species)
+
+
+#PC2s
+outs.pc2 <- outs.pca %>% 
+  filter(species%in% con.tree$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC2=mean(PC2)) %>% 
+  pull(PC2)
+
+names(outs.pc2) <-  outs.pca%>% 
+  filter(species%in% con.tree$tip.label) %>% 
+  group_by(species) %>%
+  summarize(PC2=mean(PC2)) %>% 
+  pull(species)
+
+outs.PC1.BM<-brownie.lite(con.tree,outs.pc1*10)
+
+outs.PC2.BM<-brownie.lite(con.tree,outs.pc2*10)
+
+outs.PC1.RR <- RRphylo(tree=con.tree,y=outs.pc1)
+outs.PC2.RR <- RRphylo(tree=con.tree,y=outs.pc2)
+
+outs.PC1.SS<- search.shift(RR=outs.PC1.RR,status.type="clade")
+outs.PC2.SS<- search.shift(RR=outs.PC2.RR,status.type="clade")
+```
+
+<br>
+
+#### Evolutionary Rates: PC1 vs PC2
+
+##### Estimated Evolutionary Rate of PC1
+```{r, echo= FALSE}
+outs.PC1.BM$sig2.single
+```
+
+##### Estimated Evolutionary Rate of PC2
+```{r, echo= FALSE}
+outs.PC2.BM$sig2.single
+```
+
+Across all observed primary feathers of various bird species, the evolutionary rate of PC1 is 0.006242593 and that of PC2 is 0.001396271, meaning PC1 is evolving at more than 4 times the rate of PC2. This could indicate the selection for PC1 in primary feathers as an advantageous trait in bird flight mechanics. 
+
+<br>
+
+#### Evolutionary Rate Shifts
+
+##### PC1
+
+```{r, echo=FALSE, message=FALSE, fig.cap= "Figure 3: Evolutionary rate shift in the primary feathers' PC1 plotted on modified phylogenetic tree. The numeric label represents at which node in the tree the shift occurred at. The table below shows the magnitude and statistical significance of the rate difference compared to the rest of the tree."}
+plot(con.tree, cex=0.1)
+nodelabels(node = as.numeric(rownames(outs.PC1.SS$single.clades)),text = rownames(outs.PC1.SS$single.clades))
+
+```
+
+```{r, echo= FALSE}
+outs.PC1.SS$single.clades
+```
+
+According to figure 3 and the table, there is a statistically significant downwards PC1 rate shift in node 172, which corresponds to the fringillidae family. Compared to other groups, the fringillidae's primary feather PC1 evolutionary rate is decreased by a magnitude of 0.0009462863 at a 0.1% significance level. 
+
+##### PC2
+
+```{r, echo=FALSE, message=FALSE, fig.cap= "Figure 4: Evolutionary rate shift in the primary feathers' PC2 plotted on modified phylogenetic tree. The table below shows the magnitude and statistical significance of the rate difference compared to the rest of the tree."}
+plot(con.tree, cex=0.1)
+nodelabels(node = as.numeric(rownames(outs.PC2.SS$single.clades)),text = rownames(outs.PC2.SS$single.clades))
+```
+
+```{r, echo= FALSE}
+outs.PC2.SS$single.clades
+```
+
+Similarly, there is also a statistically significant downwards PC2 rate shift in node 175, which represents the group encompassing the new world blackbirds and the new world sparrows. Within this group, the evolutionary rate of PC2 in primary feathers is shifted by -0.0003019869 at a 0.4% significance level. 
+
+### Discussion
+
+
+### Contributions
+
+
+### References
