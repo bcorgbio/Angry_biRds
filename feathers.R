@@ -120,10 +120,10 @@ outs.PC1.SS$single.clades
 outs.PC2.SS<- search.shift(RR=outs.PC2.RR,status.type="clade")
 outs.PC2.SS$single.clades
 
-plot(con.tree, cex=0.2)
+plot(con.tree, cex=0.1)
 nodelabels(node = as.numeric(rownames(outs.PC1.SS$single.clades)),text = rownames(outs.PC1.SS$single.clades))
 
-plot(con.tree, cex=0.2)
+plot(con.tree, cex=0.1)
 nodelabels(node = as.numeric(rownames(outs.PC2.SS$single.clades)),text = rownames(outs.PC2.SS$single.clades))
 
 outs.PC1.plot <- plotShift(RR=outs.PC1.RR,SS=outs.PC1.SS)
