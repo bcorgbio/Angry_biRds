@@ -35,7 +35,7 @@ Outline-based shape analysis, utilizing Elliptical Fourier Analysis (EFA) and Pr
 PCA plot output for primary feathers can be referenced below (Figures 2 & 3). Evolutionary rates of the PC scores were observed across the Avian tree [@jetz2012global] and species information was added. 
 
 #### Evolutionary Rates & Shifts
-The “non-censored test” [@o2006testing] was utilized to estimate the rates of morphological evolution over a phylogenetic tree. Phylogenetic ridge regression [@kratsch2014ridgerace] was then utilized to determine whether the evolutionary shift was to a slower or faster rate. The regressions are based on the phenotype values at each node vs. time between nodes and along the path. The value of the slope parameter of these regressions is the rate.
+The “non-censored test” [@o2006testing] was utilized to estimate the rates of morphological evolution over a phylogenetic tree. Phylogenetic ridge regression [@kratsch2014ridgerace] was then utilized to determine whether the evolutionary shift was to a slower or faster rate. The regressions are based on the phenotype values at each node vs. time between nodes and along the path. 
 
 
 ```{r, echo= FALSE, message= FALSE, fig.cap= "Figure 1: Modified phylogenetic tree sourced from *BirdTree.org*. The tree was shortened to only include species analyzed in PCA."}
