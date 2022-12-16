@@ -25,14 +25,14 @@ In this study, we will explore primary feather length, shape, and structural cha
 
 ### Methods
 #### Image Acquisition 
-Images analyzed in this project were acquired through the U.S. Fish & Wildlife Service’s database: “Feather Atlas”. Records from the Feather Atlas are accessible for all Avians further analyzed below. 
+Images analyzed in this project were acquired through the U.S. Fish & Wildlife Service’s database: “Feather Atlas”. Avian families analyzed include Apodiformes, Colmbiformes, Galliformes, Gruiformes, & Passeriformes. Records from the Feather Atlas are accessible for all Aves further analyzed below. 
 
 #### Digitization
 The outermost primary feather shapes across all species of Avians were examined utilizing the image analysis program FIJI. After opening each image in FIJI, the scale was set aligning with the scale-bar present in the database. The primary feathers were then traced utilizing the polygon selection tool. A script was created, and the selected points (x and y coordinates) were exported in a .txt file for further analysis.
 
 #### Shape & Comparative Analysis
 Outline-based shape analysis, utilizing Elliptical Fourier Analysis (EFA) and Principal Components Analysis (PCA), were performed to compare shape change between species. 
-PCA plot output for primary feathers can be referenced below (Figures 2 & 3). Evolutionary rates of the PC scores were observed across the Avian tree [@jetz2012global] and species information was added (Figure 1). 
+PCA plot output for primary feathers can be referenced below (Figures 2 & 3). Evolutionary rates of the PC scores were observed across the Avian tree [@BirdTree.org] and species information was added (Figure 1). 
 
 #### Evolutionary Rates & Shifts
 The “non-censored test” [@o2006testing] was utilized to estimate the rates of morphological evolution over a phylogenetic tree. Phylogenetic ridge regression [@kratsch2014ridgerace] was then utilized to determine whether the evolutionary shift was to a slower or faster rate. The regressions are based on the phenotype values at each node vs. time between nodes and along the path. 
