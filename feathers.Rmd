@@ -197,6 +197,12 @@ Since the groups in which we detected significant evolutionary rate shifts broad
 
 
 ### Contributions
+Philip Chen (Code + Results)
 
+Stephen Mooney (Code + Discussion)
+
+Jack Kloster (Introduction + Methods)
+
+Jordan Nunes (Data Collection)
 
 ### References
