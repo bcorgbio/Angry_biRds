@@ -205,8 +205,7 @@ Similarly, there is also a statistically significant downwards PC2 rate shift in
 ### Discussion
 Since the groups in which we detected significant evolutionary rate shifts broadly include both migrant and resident species, the shifts did not track with migrational birds. The double downward shift, with PC2 downshifting a large portion of measured birds and PC1 further downshifting some of the birds, supports the theory that primary flight feathers have a slow evolutionary rate. This slow evolutionary rate is likely because of the difficulty to evolve flight, and the considerable selective advantage efficient flight is on bird species [@Bock]. Changes to the feather are less common, as any change that decreases flight efficiency often proves to be much more detrimental to the bird than any gained benefit. The modern bird lineages studied likely had an ancestor that already had a highly adapted feather shape that worked well for both migratory and nonmigratory behavior. It is interesting to note that these down shifts occurred within New World lineages, suggesting a geographical connection to evolutionary rate.
 
-To continue this study, all of the primaries of the birds should be analyzed so that the feathers' evolutionary rate can be compared to one another. Additionally, more bird lineages should be studied to allow for a broader understanding of primary feather shape, and details about their habits (beyond migratory or nonmigratory) should be tracked to see if other factors are linked with changes in feather shape. 
-
+To continue this study, all of the primaries of the birds should be analyzed so that the feathers' evolutionary rate can be compared to one another. Additionally, more bird lineages should be studied to allow for a broader understanding of primary feather shape, and details about their habits (beyond migratory or nonmigratory) should be tracked to see if other factors are linked with changes in feather shape. Furthermore, previous studies have been conducted regarding the feather quality of long-distance migratory specie [@szép_dobránszky_møller_dyke_lendvai_2019]. Researchers utilized measurements of bending stiffness, feather length, and thickness to lead them to the conclusion that older individuals tend to posses better quality feathers. They also concluded that individuals who live to older ages have similar, or higher, feather growth rates than those captured at young ages. Relating to our research, utilizing known age feather samples, instead of the generalized Adult group, could provide further information regarding the adaptive significance of the traits showcased in the aforementioned study and specifically within each of the clades analyzed in our research.
 
 ### Contributions
 Philip Chen (Code + Results + Data Collection)
@@ -215,6 +214,6 @@ Stephen Mooney (Code + Discussion)
 
 Jack Kloster (Introduction + Methods + Data Collection)
 
-Jordan Nunes (Data Collection)
+Jordan Nunes (Data Collection + Discussion)
 
 ### References
