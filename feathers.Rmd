@@ -19,9 +19,9 @@ library(wesanderson)
 ```
 
 ### Introduction
-Migration is an integral facet of many avian life cycles and usually leads birds from areas of low resources to areas of high resources/nesting spaces. To effectively move between distant geographic locations, migratory birds have been naturally selected for specific morphological traits, such as the length/size of wings and feathers. Most recent research has focused on the overall length of the wing and its outline in the study of the external avian morphological adaptations as it can facilitate an energy-efficient migratory flight (@de2020mechanical). Primary feathers are a vital part of a bird’s wing and overall flight ability. These feathers are one of the most prominent features found on a bird’s wings, generating the forward thrust during flight which ultimately aids in propelling the bird into the air. If these feathers are cut or damaged, the bird’s ability to fly is significantly impaired. 
+Migration is an integral facet of many avian life cycles and usually leads birds from areas of low resources to areas of high resources and nesting spaces. To effectively move between distant geographic locations, migratory birds have been naturally selected for specific morphological traits, such as the length/size of wings and feathers. Most recent research has focused on the overall length of the wing and its outline in the study of the external avian morphological adaptations as it can facilitate an energy-efficient migratory flight [@de2020mechanical]. Primary feathers are a vital part of a bird’s wing and overall flight ability. These feathers are one of the most prominent features found on a bird’s wings, generating the forward thrust during flight which ultimately aids in propelling the bird into the air. If these feathers are cut or damaged, the bird’s ability to fly is significantly impaired. 
 
-In this study, we will explore primary feather length, shape, and structural characteristics between varying species of birds, both migratory and non-migratory. We predict that migration distance will be strongly correlated with longer primary feathers. These mechanical and structural adaptations within the primary feathers may give insight into the importance/favoring of primary feathers in the long-distance flight of birds. This study also aims to determine if the rates of primary feather-shape evolution between the two types of birds are similar and if they have undergone significant shifts among lineages. Furthermore, we wanted to discover if these primary feather shapes were correlated with each other. The feathers will be evaluated and compared through the phylogenetic analysis of over 100 species of Aves within a particular family, utilizing data collected from the feather atlas provided by the U.S. Fish & Wildlife Services. This research is vital as avian migration is an ever-changing process, and scientists predict that migration patterns will significantly shift in the distant future as the planet continues to warm due to climate change. 
+In this study, we will explore primary feather length, shape, and structural characteristics that may explain the variation between varying species of birds, both migratory and non-migratory. We predict that migration distance will be strongly correlated with longer primary feathers. These mechanical and structural adaptations within the primary feathers may give insight into the importance/favoring of primary feathers in the long-distance flight of birds. This study also aims to determine if the rates of primary feather-shape evolution between the two types of birds are similar and if they have undergone significant shifts among lineages. The feathers will be evaluated and compared through the phylogenetic analysis of over 100 species of Aves within different families, utilizing data collected from the feather atlas provided by the U.S. Fish & Wildlife Services. This research is vital as avian migration is an ever-changing process, and scientists predict that migration patterns will significantly shift in the distant future as the planet continues to warm due to climate change. 
 
 ### Methods
 #### Image Acquisition 
@@ -169,7 +169,7 @@ outs.PC1.BM$sig2.single
 outs.PC2.BM$sig2.single
 ```
 
-Across all observed primary feathers of various bird species, the evolutionary rate of PC1 is 0.006242593 and that of PC2 is 0.001396271, meaning PC1 is evolving at more than 4 times the rate of PC2. This could indicate there has been an elevated amount of selection pressure for PC1 in primary feathers as a potential advantageous trait in bird flight mechanics in varying environments and lifestyles.
+Across all observed primary feathers of various bird species, the evolutionary rate of PC1 is 0.006242593 and that of PC2 is 0.001396271, meaning PC1 is evolving at more than 4 times the rate of PC2. This could indicate there has been an elevated amount of selection pressure for PC1 in primary feathers as a potential advantageous trait in bird flight mechanics in varying environments and lifestyles when compared to other principal components. 
 
 <br>
 
@@ -200,22 +200,20 @@ nodelabels(node = as.numeric(rownames(outs.PC2.SS$single.clades)),text = rowname
 outs.PC2.SS$single.clades
 ```
 
-Similarly, there is also a statistically significant downwards PC2 rate shift in node 175, which represents the group encompassing the new world blackbirds and the new world sparrows. Within this group, the evolutionary rate of PC2 in primary feathers is shifted by -0.0003019869 at a 0.4% significance level. 
-
-Since the groups in which we detected significant evolutionary rate shifts broadly include both migrant and resident species, we cannot conclusively state that the shifts had a causal relationship with migration patterns. However, because we analyzed the outermost primary feathers, which are used for thrust and lift during flight, we can speculate that certain groups have evolved varying degrees of traits that may affect their flight mechanisms and potentially behaviors such as migration.
+Similarly, there is also a statistically significant downwards PC2 rate shift in node 175, which represents the group encompassing the new world blackbirds and the new world sparrows. Within this group, the evolutionary rate of PC2 in primary feathers is shifted by -0.0003019869 at a 0.4% significance level. Based on these results regarding the outermost primary feathers, which are used for thrust and lift during flight, we can speculate that certain groups have evolved varying degrees of traits that may affect their flight mechanisms and potentially behaviors such as migration.
 
 ### Discussion
-Since the groups in which we detected significant evolutionary rate shifts broadly include both migrant and resident species, the shifts did not track with migrational birds. The double downward shift, with PC2 downshifting a large portion of measured birds and PC1 further downshifting some of the birds, supports the theory that primary flight feathers have a slow evolutionary rate. This slow evolutionary rate is likely because of the difficulty to evolve flight, and the considerable selective advantage efficient flight is on bird species (@Bock). Changes to the feather are less common, as any change that decreases flight efficiency often proves to be much more detrimental to the bird than any gained benefit. The modern bird lineages studied likely had an ancestor that already had a highly adapted feather shape that worked well for both migratory and nonmigratory behavior. It is interesting to note that these down shifts occurred within New World lineages, suggesting a geographical connection to evolutionary rate.
+Since the groups in which we detected significant evolutionary rate shifts broadly include both migrant and resident species, the shifts did not track with migrational birds. The double downward shift, with PC2 downshifting a large portion of measured birds and PC1 further downshifting some of the birds, supports the theory that primary flight feathers have a slow evolutionary rate. This slow evolutionary rate is likely because of the difficulty to evolve flight, and the considerable selective advantage efficient flight is on bird species [@Bock]. Changes to the feather are less common, as any change that decreases flight efficiency often proves to be much more detrimental to the bird than any gained benefit. The modern bird lineages studied likely had an ancestor that already had a highly adapted feather shape that worked well for both migratory and nonmigratory behavior. It is interesting to note that these down shifts occurred within New World lineages, suggesting a geographical connection to evolutionary rate.
 
 To continue this study, all of the primaries of the birds should be analyzed so that the feathers' evolutionary rate can be compared to one another. Additionally, more bird lineages should be studied to allow for a broader understanding of primary feather shape, and details about their habits (beyond migratory or nonmigratory) should be tracked to see if other factors are linked with changes in feather shape. 
 
 
 ### Contributions
-Philip Chen (Code + Results)
+Philip Chen (Code + Results + Data Collection)
 
 Stephen Mooney (Code + Discussion)
 
-Jack Kloster (Introduction + Methods)
+Jack Kloster (Introduction + Methods + Data Collection)
 
 Jordan Nunes (Data Collection)
 
