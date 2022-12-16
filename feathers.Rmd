@@ -38,7 +38,7 @@ PCA plot output for primary feathers can be referenced below (Figures 2 & 3). Ev
 The “non-censored test” [@o2006testing] was utilized to estimate the rates of morphological evolution over a phylogenetic tree. Phylogenetic ridge regression [@kratsch2014ridgerace] was then utilized to determine whether the evolutionary shift was to a slower or faster rate. The regressions are based on the phenotype values at each node vs. time between nodes and along the path. 
 
 
-```{r, echo= FALSE, message= FALSE, fig.cap= "Figure 1: Modified phylogenetic tree sourced from *BirdTree.org*. The tree was shortened to only include species analyzed in PCA."}
+```{r, echo= FALSE, message= FALSE, fig.cap= "Figure 1: Modified phylogenetic tree sourced from *@BirdTree.org*. The tree was shortened to only include species analyzed in PCA."}
 
 con.tree <- read.tree("contree.tre")
 con.tree <- root(con.tree,"Sayornis_phoebe")
