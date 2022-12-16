@@ -23,8 +23,19 @@ Migration is an integral facet of many avian life cycles and usually leads birds
 
 In this study, we will explore primary feather length, shape, and structural characteristics between varying species of birds, both migratory and non-migratory. We predict that migration distance will be strongly correlated with longer primary feathers. These mechanical and structural adaptations within the primary feathers may give insight into the importance/favoring of primary feathers in the long-distance flight of birds. This study also aims to determine if the rates of primary feather-shape evolution between the two types of birds are similar and if they have undergone significant shifts among lineages. Furthermore, we wanted to discover if these primary feather shapes were correlated with each other. The feathers will be evaluated and compared through the phylogenetic analysis of over 100 species of Aves within a particular family, utilizing data collected from the feather atlas provided by the U.S. Fish & Wildlife Services. This research is vital as avian migration is an ever-changing process, and scientists predict that migration patterns will significantly shift in the distant future as the planet continues to warm due to climate change. 
 
-
 ### Methods
+#### Image Acquisition 
+Images analyzed in this project were acquired through the U.S. Fish & Wildlife Service’s database: “Feather Atlas”. Records from the Feather Atlas are accessible for all Avians further analyzed below. 
+
+#### Digitization
+The outermost primary feather shapes across all species of Avians were examined utilizing the image analysis program FIJI. After opening each image in FIJI, the scale was set aligning with the scale-bar present in the database. The primary feathers were then traced utilizing the polygon selection tool. A script was created, and the selected points (x and y coordinates) were exported in a .txt file for further analysis.
+
+#### Shape & Comparative Analysis
+Outline-based shape analysis, utilizing Elliptical Fourier Analysis (EFA) and Principal Components Analysis (PCA), were performed to compare shape change between species. 
+PCA plot output for primary feathers can be referenced below (Figures 2 & 3). Evolutionary rates of the PC scores were observed across the Avian tree [@jetz2012global] and species information was added. 
+
+#### Evolutionary Rates & Shifts
+The “non-censored test” [@o2006testing] was utilized to estimate the rates of morphological evolution over a phylogenetic tree. Phylogenetic ridge regression [@kratsch2014ridgerace] was then utilized to determine whether the evolutionary shift was to a slower or faster rate. The regressions are based on the phenotype values at each node vs. time between nodes and along the path. The value of the slope parameter of these regressions is the rate.
 
 
 ```{r, echo= FALSE, message= FALSE, fig.cap= "Figure 1: Modified phylogenetic tree sourced from *BirdTree.org*. The tree was shortened to only include species analyzed in PCA."}
